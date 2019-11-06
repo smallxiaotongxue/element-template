@@ -57,7 +57,15 @@
       "plugin:vue/essential",
       "@vue/standard"
     ],
-    "rules": {},
+    "rules": {
+      "comma-dangle": "off",
+      "semi": "off",
+      "indent": "off",
+      "no-trailing-spaces": "off",
+      "padded-blocks": "off",
+      "eol-last": "off",
+      "no-multiple-empty-lines": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     },
