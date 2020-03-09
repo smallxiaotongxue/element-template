@@ -175,12 +175,12 @@ export const throttle = (func, time = 30, options = { leading: true, trailing: t
   return _throttle;
 };
 
-export const downloadFile  = (url) => {
+export const downloadFile = (url, name) => {
   var a = document.createElement('a');
   document.body.appendChild(a);
 
   a.href = url;
-  a.download = name || '工资信息';
+  a.download = name || '下载文件';
   a.click()
   document.body.removeChild(a);
 };

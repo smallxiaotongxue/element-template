@@ -1,0 +1,33 @@
+body {
+  color: #333333;
+  font-size: 14px;
+  font-family: Microsoft YaHei, SimHei, arial, helvetica, sans-serif !important;
+  background: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body .el-table th.gutter{
+  display: table-cell!important;
+}
+
+body .el-table colgroup.gutter{
+  display: table-cell!important;
+}
+
+.el-menu {
+  border-right-color: transparent;
+
+  &.el-menu--horizontal {
+    border-bottom-color: transparent;
+  }
+}
