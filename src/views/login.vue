@@ -84,7 +84,7 @@
         this.$refs[formName].validate(valid => {
           if (valid) {
             this.$api.common.login(this.form)
-              .then(() => {
+              .then((res) => {
                 sessionStorage.setItem('system-token', res.data.token || '123456');
                 this.$router.push({ path: this.$route.query.redirect || '/' })
                 this.loading = false
