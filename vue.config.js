@@ -1,14 +1,15 @@
 const FileManagerPlugin = require('filemanager-webpack-plugin'); // 引入filemanager-webpack-plugin插件
 const ENV = process.env.NODE_ENV === 'production' ? 'production' : process.env.NODE_ENV === 'testing' ? 'testing' : 'dev';
+const outputDirName = 'output_' + ENV;
 
 module.exports = {
   /** 区分打包环境与开发环境
    * process.env.NODE_ENV==='production'  (打包环境)
    * process.env.NODE_ENV==='development' (开发环境)
-   * publicPath: process.env.NODE_ENV==='production'?" ":'/',
+   * publicPath: ENV === 'production' ? '/dist' : ENV === 'testing' ? '/dist' : '/'
    */
   publicPath: ENV === 'production' ? '/dist' : ENV === 'testing' ? '/dist' : '/', // 构建好的文件输出到哪里
-  outputDir: 'output_' + ENV,
+  outputDir: outputDirName,
 
   // where to put static assets (js/css/img/font/...)
   assetsDir: '',
@@ -37,36 +38,45 @@ module.exports = {
   configureWebpack: config => {
     if (ENV === 'testing' || ENV === 'production') {
       const plugins = [];
-
       plugins.push(
         new FileManagerPlugin({ // 初始化 filemanager-webpack-plugin 插件实例
           onEnd: {
             delete: [ // 首先需要删除项目根目录下的dist.zip
-              './dist.zip',
+              `./${outputDirName}.zip`,
             ],
+            // copy: [
+            //   {
+            //     source: ``,
+            //     destination: `./${outputDirName}.zip`
+            //   }
+            // ],
             archive: [ // 然后我们选择dist文件夹将之打包成dist.zip并放在根目录
               {
-                source: './dist',
-                destination: './dist.zip'
+                source: `./${outputDirName}.zip`,
+                destination: `./${outputDirName}.zip`
               },
             ]
           }
         })
       );
-      config.plugins = [
-        ...config.plugins,
-        ...plugins
-      ]
+      config.plugins = [...config.plugins, ...plugins]
     }
   },
   // CSS 相关选项
-  // css: {
-  //   // 将组件内部的css提取到一个单独的css文件（只用在生产环境）也可以是传递给 extract-text-webpack-plugin 的选项对象
-  //   extract: true, // 允许生成 CSS source maps?
-  //   sourceMap: false, // pass custom options to pre-processor loaders. e.g. to pass options to // sass-loader, use { sass: { ... } }
-  //   loaderOptions: {}, // Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.
-  //   modules: false
-  // },
+  css: {
+    // 将组件内部的css提取到一个单独的css文件（只用在生产环境）也可以是传递给 extract-text-webpack-plugin 的选项对象
+    extract: true, // 允许生成 CSS source maps?
+    sourceMap: false, // pass custom options to pre-processor loaders. e.g. to pass options to // sass-loader, use { sass: { ... } }
+    loaderOptions: { // 组件内公共样式 Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.
+      sass: {
+        data: `
+          @import "~@/assets/css/sass-scoped/var.scss";
+          @import "~@/assets/css/sass-scoped/mixins.scss";
+        `
+      }
+    },
+    requireModuleExtension: false
+},
 
   // use thread-loader for babel & TS in production build // enabled by default if the machine has more than 1 cores
   // parallel: require('os').cpus().length > 1,

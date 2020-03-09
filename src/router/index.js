@@ -40,7 +40,9 @@ const constantRoutes = [
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: (to, from, position) => {
+    return position || { y: 0 };
+  },
   routes: constantRoutes,
 })
 
@@ -50,5 +52,21 @@ export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
+
+router.beforeEach((to, from, next) => {
+  // 自动化修改页面标签的 title
+  // document.title = to.meta.title;
+  to.query['backUrl'] = from.fullPath;
+
+  if (sessionStorage.getItem('TOKEN')) {
+    next();
+  } else {
+    if (to.path === "/login") {
+      next();
+    } else {
+      next("/login");
+    }
+  }
+});
 
 export default router;

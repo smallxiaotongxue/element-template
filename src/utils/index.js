@@ -3,7 +3,7 @@
  * @param obj
  * @returns {string|"undefined"|"boolean"|"number"|"string"|"function"|"symbol"|"bigint"}
  */
-export const getType = (obj) => {
+const getType = (obj) => {
   let type = typeof obj;
   if (type !== 'object') {
     return type;
@@ -15,7 +15,7 @@ export const getType = (obj) => {
  * 获取浏览器类型
  * @returns {string}
  */
-export const getBrowser = () => {
+const getBrowser = () => {
   let userAgent = navigator.userAgent;
   if (userAgent.indexOf('Opera') > -1) return 'Opera';
   if (userAgent.indexOf('Firefox') > -1) return 'Firefox';
@@ -32,7 +32,7 @@ export const getBrowser = () => {
  * @returns {*}
  * @private
  */
-export const _getOffsetTop = (el) => {
+const _getOffsetTop = (el) => {
   let rtn = el.offsetTop;
   let o = el.offsetParent;
 
@@ -48,7 +48,7 @@ export const _getOffsetTop = (el) => {
  * 处理animate.css元素动画
  * data-animate="fadeIn,2000,linear"
  */
-export const handleAnimate = () => {
+const handleAnimate = () => {
   let top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
   let vh = document.documentElement.clientHeight;
   let dom = document.querySelectorAll('.animated');
@@ -79,12 +79,12 @@ export const handleAnimate = () => {
 /**
  *  时间处理方法
  */
-export const _formatNumber = (n) => {
+const _formatNumber = (n) => {
   const str = n.toString();
   return str[1] ? str : `0${str}`;
 };
 
-export const _timeFormat = (ms) => {
+const _timeFormat = (ms) => {
   if (!ms) return '';
 
   let date = new Date(parseInt(ms));
@@ -108,7 +108,7 @@ export const _timeFormat = (ms) => {
  *            trailing---是否在结束时额外再出发一次
  * @returns {_debounce}
  */
-export const debounce = (func, time = 50, options = { leading: true, trailing: true, context: null }) => {
+const debounce = (func, time = 50, options = { leading: true, trailing: true, context: null }) => {
   let timer;
   const _debounce = function (...args) {
     if (timer) {
@@ -141,7 +141,7 @@ export const debounce = (func, time = 50, options = { leading: true, trailing: t
  * @param options
  * @returns {_throttle}
  */
-export const throttle = (func, time = 30, options = { leading: true, trailing: true, context: null }) => {
+const throttle = (func, time = 30, options = { leading: true, trailing: true, context: null }) => {
   let previous = new Date(0).getTime();
   let timer;
 
@@ -175,7 +175,7 @@ export const throttle = (func, time = 30, options = { leading: true, trailing: t
   return _throttle;
 };
 
-export const downloadFile = (url, name) => {
+const downloadFile = (url, name) => {
   var a = document.createElement('a');
   document.body.appendChild(a);
 
@@ -184,3 +184,15 @@ export const downloadFile = (url, name) => {
   a.click()
   document.body.removeChild(a);
 };
+
+export default {
+  getType,
+  getBrowser,
+  _getOffsetTop,
+  handleAnimate,
+  _formatNumber,
+  _timeFormat,
+  debounce,
+  throttle,
+  downloadFile,
+}
