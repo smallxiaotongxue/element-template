@@ -5,10 +5,10 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 /* Layout */
-// import Layout from '@/layout'
+import Layout from '@/layout'
 
 /* Router Modules */
-import components from './modules/components';
+import componentsRouter from './modules/components';
 
 
 /**
@@ -20,11 +20,22 @@ const constantRoutes = [
   {
     path: '/',
     name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    component: Layout,
     children: [
-      ...components,
+      {
+        path: 'home',
+        name: 'Home',
+        meta: { title: 'Home', icon: 'dashboard', affix: true },
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+      }
     ]
   },
+  /** when your routing map is too long, you can split it into small modules **/
+  ...componentsRouter,
+
   {
     path: '/login',
     name: 'login',

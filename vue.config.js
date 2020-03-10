@@ -12,10 +12,10 @@ module.exports = {
   outputDir: outputDirName,
 
   // where to put static assets (js/css/img/font/...)
-  assetsDir: '',
+  assetsDir: 'static',
 
   // 是否在保存时使用‘eslint-loader’进行检查 // 有效值: true | false | 'error' // 当设置为‘error’时，检查出的错误会触发编译失败
-  lintOnSave: true,
+  lintOnSave: ENV === 'dev',
 
   // 使用带有浏览器内编译器的完整构建版本 // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
   runtimeCompiler: false,
@@ -75,7 +75,6 @@ module.exports = {
         `
       }
     },
-    requireModuleExtension: false
 },
 
   // use thread-loader for babel & TS in production build // enabled by default if the machine has more than 1 cores

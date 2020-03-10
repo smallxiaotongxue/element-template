@@ -59,7 +59,7 @@ service.interceptors.response.use(
       return Promise.resolve(res);
     } else {
       // 其他错误
-      Message.error(res.message || res.msg || '服务器连接失败');
+      Message.error(response.message || response.msg || '服务器连接失败');
       return Promise.reject(response)
     }
   },

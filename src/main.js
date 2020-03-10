@@ -4,15 +4,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './plugins/element.js'
-import './components/global-components/index' // 注册公共全局组件 放入该文件下
 import axios from './plugins/axios';
 import api from './api/index';
 import utils from './utils/index';
+import './plugins/element.js'
+import './components/global-components/index' // 注册公共全局组件 放入该文件下
 
 import './assets/css/common.scss';
 
 import VueParticles from 'vue-particles';
+// import './mock'; // mock-json
 // import VueBus from 'vue-bus'; // this.$bus.emit...
 // import AnimateCss from 'animate.css';
 
