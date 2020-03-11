@@ -10,7 +10,7 @@ import utils from './utils/index';
 import './plugins/element.js'
 import './components/global-components/index' // 注册公共全局组件 放入该文件下
 
-import './assets/css/common.scss';
+import './assets/css/index.scss';
 
 import VueParticles from 'vue-particles';
 // import './mock'; // mock-json

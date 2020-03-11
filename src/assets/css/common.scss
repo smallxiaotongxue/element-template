@@ -1,13 +1,33 @@
-body {
-  color: #333333;
-  font-size: 14px;
-  font-family: Microsoft YaHei, SimHei, arial, helvetica, sans-serif !important;
-  background: #ffffff;
-}
+
 * {
   margin: 0;
   padding: 0;
 }
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  color: #333333;
+  font-size: 14px;
+  line-height: 1.4;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Microsoft YaHei, PingFang SC, SimHei, Helvetica Neue, Helvetica, Hiragino Sans GB, Arial, sans-serif;
+  background: #ffffff;
+}
+
+#app {
+  height: 100%;
+}
+
+label {
+  font-weight: 700;
+}
+
 ul, ol {
   list-style: none;
 }
@@ -16,18 +36,12 @@ a {
   text-decoration: none;
 }
 
-body .el-table th.gutter{
-  display: table-cell!important;
+.fr {
+  float: right;
 }
 
-body .el-table colgroup.gutter{
-  display: table-cell!important;
+.fl {
+  float: left;
 }
 
-.el-menu {
-  border-right-color: transparent;
 
-  &.el-menu--horizontal {
-    border-bottom-color: transparent;
-  }
-}

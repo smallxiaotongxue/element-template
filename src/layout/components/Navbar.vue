@@ -2,9 +2,11 @@
 
 <template>
     <div class="navbar">
-      <div style="padding: 0 15px;" @click="toggleSideBar">
-        <i class="el-icon-s-fold"></i>
+      <div id="hamburger-container" class="hamburger-container" style="padding: 0 15px;" @click="toggleSideBar">
+        <i class="hamburger el-icon-s-fold" :class="{'is-active': sidebar.opened}"></i>
       </div>
+
+      <breadcrumb id="breadcrumb-container" class="breadcrumb-container"></breadcrumb>
     </div>
 </template>
 
