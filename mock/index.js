@@ -1,5 +1,7 @@
 import Mock from 'mockjs';
 
+Mock.XHR.prototype.withCredentials = true;
+
 import user from './mock_jsons/user'
 import role from './mock_jsons/role'
 import article from './mock_jsons/article'
@@ -10,6 +12,6 @@ const mocks = [
   ...role,
   ...article,
   ...search
-]
+];
 
 export default mocks;

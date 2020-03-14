@@ -13,7 +13,7 @@ import './components/global-components/index' // 注册公共全局组件 放入
 import './assets/css/index.scss';
 
 import VueParticles from 'vue-particles';
-// import './mock'; // mock-json
+import '../mock/index'; // mock-json
 // import VueBus from 'vue-bus'; // this.$bus.emit...
 // import AnimateCss from 'animate.css';
 

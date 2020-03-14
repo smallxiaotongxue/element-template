@@ -58,7 +58,7 @@
 
             let styleTag = document.getElementById(id);
             if (!styleTag) {
-              document.createElement('style');
+              styleTag = document.createElement('style');
               styleTag.setAttribute('id', id);
               document.head.appendChild(styleTag);
             }
