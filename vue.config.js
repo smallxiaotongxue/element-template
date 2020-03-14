@@ -70,7 +70,7 @@ module.exports = {
     loaderOptions: { // 组件内公共样式 Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.
       sass: {
         data: `
-          @import "~@/assets/css/sass-scoped/var.scss";
+          @import "~@/assets/css/sass-scoped/variable.scss";
           @import "~@/assets/css/sass-scoped/mixins.scss";
         `
       }

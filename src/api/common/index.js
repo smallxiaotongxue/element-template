@@ -1,9 +1,5 @@
-import axios from '../../plugins/axios';
-
-const login = params => {
-  return axios.post('./login', params);
-};
+// import axios from '../../plugins/axios';
 
 export default {
-  login
+
 }

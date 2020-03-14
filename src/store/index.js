@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getters from './getters'
 
 Vue.use(Vuex);
 
@@ -20,13 +21,9 @@ const store = new Vuex.Store({
   state: {
     token: ''
   },
-  getters: {
-    token: state => state.token,
-  },
+  getters,
   mutations: {
-    SET_TOKEN (state, payload) {
-      state.token = payload.token;
-    }
+
   },
   actions: {
 

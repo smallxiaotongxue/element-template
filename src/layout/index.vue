@@ -2,21 +2,20 @@
 
 <template>
     <div class="app-wrapper" :class="classObj">
-      <div v-if="device === 'mobile' && sideBar.opened" class="drawer-bg" @click="handleClickOutside"></div>
+      <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
 
-      <sidebar class="sidebar-container">
-        <div :class="{ hasTagsView: needTagsView }" class="main-container">
-          <div :class="{'fixed-header': fixedHeader}">
-            <navbar></navbar>
-            <tags-view v-if="needTagsView"></tags-view>
-          </div>
+      <sidebar class="sidebar-container"></sidebar>
 
-          <app-main></app-main>
-          <right-panel v-if="showSettings">
-            <settings></settings>
-          </right-panel>
+      <div :class="{ hasTagsView: needTagsView }" class="main-container">
+        <div :class="{'fixed-header': fixedHeader}">
+          <navbar></navbar>
+          <tags-view v-if="needTagsView"></tags-view>
         </div>
-      </sidebar>
+        <app-main></app-main>
+        <right-panel v-if="showSettings">
+          <settings></settings>
+        </right-panel>
+      </div>
 
     </div>
 </template>

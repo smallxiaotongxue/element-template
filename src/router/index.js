@@ -16,19 +16,17 @@ import componentsRouter from './modules/components';
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-const constantRoutes = [
+export const constantRoutes = [
   {
     path: '/',
     name: 'home',
     component: Layout,
+    redirect: '/home',
     children: [
       {
         path: 'home',
         name: 'Home',
-        meta: { title: 'Home', icon: 'dashboard', affix: true },
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
+        meta: { title: 'Home', icon: 'home', affix: true },
         component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
       }
     ]
@@ -43,11 +41,41 @@ const constantRoutes = [
   },
   {
     path: '/404',
-    component: () => import('@/views/error-page/404'),
+    component: () => import(/* webpackChunkName: "login" */ '@/views/error-page/404'),
   },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
-]
+];
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'Permission',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'page',
+        component: () => import('@/views/permission/index'),
+        name: 'PagePermission',
+        meta: {
+          title: 'Page Permission',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+  }
+];
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support

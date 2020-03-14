@@ -62,6 +62,8 @@
     ],
     "rules": {
       "comma-dangle": "off",
+      "space-before-function-paren": "off",
+      "no-useless-escape": "off",
       "semi": "off",
       "indent": "off",
       "no-trailing-spaces": "off",
