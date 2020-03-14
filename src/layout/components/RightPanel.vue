@@ -58,13 +58,13 @@
     mounted () {
       this.insertToBody();
     },
-    destroyed () {
+    beforeDestroy () {
       const elx = this.$refs.rightPanel;
       elx.remove();
     },
     methods: {
       addEventClick () {
-        window.addEventListener('click', this.closeSidebar);
+        window.addEventListener('click', this.closeSideBar);
       },
       closeSideBar (event) {
         const parent = event.target.closest('.rightPanel');
