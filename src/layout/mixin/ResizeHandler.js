@@ -7,7 +7,7 @@ export default {
   watch: {
     $route (route) {
       if (this.device === 'mobile' && this.sidebar.opened) {
-        store.dispatch('app/closeSideBar', { widthoutAnimation: false })
+        store.dispatch('app/closeSideBar', { withoutAnimation: false })
       }
     }
   },
@@ -35,7 +35,7 @@ export default {
         store.dispatch('app/toggleDevice', isMobile ? 'mobile' : 'desktop')
 
         if (isMobile) {
-          store.dispatch('app/closeSideBar', { widthoutAnimation: true })
+          store.dispatch('app/closeSideBar', { withoutAnimation: true })
         }
       }
     }
