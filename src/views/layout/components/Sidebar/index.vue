@@ -177,8 +177,8 @@
         .el-tooltip {
           padding: 0 !important;
 
-          .svg-icon {
-            margin-left: 20px;
+          i {
+            margin-left: 16px;
           }
         }
       }
@@ -189,8 +189,8 @@
         &>.el-submenu__title {
           padding: 0 !important;
 
-          .svg-icon {
-            margin-left: 20px;
+          i {
+            margin-left: 16px;
           }
 
           .el-submenu__icon-arrow {
