@@ -25,7 +25,7 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img src="../../assets/logo.png" class="user-avatar" alt=""/>
+          <img :src="require('@/assets/logo.png')" class="user-avatar" alt=""/>
           <i class="el-icon-caret-bottom"></i>
         </div>
 

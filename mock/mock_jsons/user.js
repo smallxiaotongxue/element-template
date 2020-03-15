@@ -51,7 +51,7 @@ Mock.mock(/.*\/user\/userInfo.*/, 'post', (config) => {
 });
 
 // logout
-Mock.mock(/.*\/user\/logout.*/  , 'post', (config) => {
+Mock.mock(/.*\/user\/logout.*/, 'post', (config) => {
   return {
     ret: 0,
     message: 'success'

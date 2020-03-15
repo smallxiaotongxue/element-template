@@ -6,7 +6,7 @@ import defaultSettings from '@/settings'
 Vue.use(Router);
 
 /* Layout */
-import Layout from '@/layout'
+import Layout from '@/views/layout'
 
 /* Router Modules */
 import componentsRouter from './modules/components';
