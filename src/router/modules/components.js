@@ -2,7 +2,8 @@ export default [
   {
     path: '/components',
     name: 'Components',
-    meta: { title: '组件', },
+    meta: { title: '组件综合', },
+    redirect: '/components/page1',
     component: () => import(/* webpackChunkName: "components" */ '../../views/components/index'),
     children: [
       {
