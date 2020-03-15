@@ -51,7 +51,7 @@ service.interceptors.response.use(
         path: '/login',
         query: { redirect: router.currentRoute.fullPath } // 从哪个页面跳转过来
       });
-      window.open(res.toUrl, '_self');
+
       return Promise.reject(response);
 
     } else if (res.ret === 0) {

@@ -1,17 +1,9 @@
-import Mock from 'mockjs';
+// 将所有的mock文件引入
+require('./mock_jsons/user');
 
-Mock.XHR.prototype.withCredentials = true;
+// 在这里可以做一些通用的配置
+const Mock = require("mockjs");
 
-import user from './mock_jsons/user'
-import role from './mock_jsons/role'
-import article from './mock_jsons/article'
-import search from './mock_jsons/remote-search'
-
-const mocks = [
-  ...user,
-  ...role,
-  ...article,
-  ...search
-];
-
-export default mocks;
+Mock.setup({
+  timeout: '100-200' // 设置所有ajax请求的超时时间，模拟网络传输耗时
+});

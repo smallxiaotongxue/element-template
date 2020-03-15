@@ -80,8 +80,13 @@
         this.$store.dispatch('app/toggleSideBar')
       },
       async logout () {
-        await this.$store.dispatch('user/logout');
-        this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        await this.$store.dispatch('user/logout').then((res) => {
+          this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        }).catch(() => {
+          // TODO delete
+          this.$store.commit('user/SET_TOKEN', '');
+          this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        });
       },
       screen () {
         let element = document.documentElement;

@@ -1,6 +1,8 @@
 import '@babel/polyfill'
-
 import Vue from 'vue'
+
+import './assets/css/index.scss';
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -10,10 +12,9 @@ import utils from './utils/index';
 import './plugins/element.js'
 import './components/global-components/index' // 注册公共全局组件 放入该文件下
 
-import './assets/css/index.scss';
+process.env.NODE_ENV === 'development' && process.env.VUE_APP_MOCK && require('../mock') // dev环境配置 引入mock-json
 
 import VueParticles from 'vue-particles';
-import '../mock/index'; // mock-json
 // import VueBus from 'vue-bus'; // this.$bus.emit...
 // import AnimateCss from 'animate.css';
 

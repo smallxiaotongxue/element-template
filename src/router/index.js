@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import defaultSettings from '@/settings'
 // import store from '../store/index'
 
 Vue.use(Router);
@@ -38,10 +39,12 @@ export const constantRoutes = [
   {
     path: '/login',
     name: 'login',
+    meta: { title: '登录', icon: 'home', affix: false },
     component: () => import(/* webpackChunkName: "login" */ '../views/login.vue'),
   },
   {
     path: '/404',
+    meta: { title: '404', icon: 'home', affix: false },
     component: () => import(/* webpackChunkName: "login" */ '@/views/error-page/404'),
   },
   // 404 page must be placed at the end !!!
@@ -93,17 +96,30 @@ export function resetRouter () {
   router.matcher = newRouter.matcher // reset router
 }
 
+const whiteList = ['/login', '/toLogin'] // no redirect whitelist
 router.beforeEach((to, from, next) => {
-  // document.title = to.meta.title; // 自动化修改页面标签的 title
+  document.title = `${to.meta.title || ''} - ${defaultSettings.title}`; // 自动化修改页面标签的 title
   // to.query['backUrl'] = from.fullPath;
 
-  if (sessionStorage.getItem('TOKEN')) {
-    next();
-  } else {
+  let token = sessionStorage.getItem('TOKEN');
+  if (token) {
     if (to.path === "/login") {
+      next({ path: '/' }); // if is logged in, redirect to the home page
+    } else {
+      // 确定用户当前访问路径是否有权限
+      const hasPermission = true;
+      if (hasPermission) {
+        next();
+      } else {
+        next(`/login?redirect=${to.path}`);
+      }
+    }
+  } else {
+    /* has no token */
+    if (whiteList.indexOf(to.path) !== -1) {
       next();
     } else {
-      next("/login");
+      next(`/login?redirect=${to.path}`);
     }
   }
 });

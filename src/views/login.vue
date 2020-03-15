@@ -53,8 +53,8 @@
     data () {
       return {
         form: {
-          username: sessionStorage.userInfo || 'admin',
-          password: sessionStorage.passwordInfo || '654321'
+          username: 'admin',
+          password: '123456'
         },
         isMemery: false,
         rules: {
@@ -72,29 +72,28 @@
     },
     mounted () {
       if (this.form.username === '') {
-        this.$refs['username'].focus();
+        this.$refs['username'].focus()
       } else if (this.form.password === '') {
-        this.$refs['password'].focus();
+        this.$refs['password'].focus()
       }
     },
     destroyed () {
     },
     methods: {
       login (formName) {
-        this.loading = true;
+        this.loading = true
         this.$refs[formName].validate(valid => {
           if (valid) {
             this.$store.dispatch('user/login', this.form).then((res) => {
-                sessionStorage.setItem('TOKEN', res.data.token || '123456');
-                this.$router.push({ path: this.$route.query.redirect || '/' })
-                this.loading = false
-            })
-            .catch(() => {
-              // TODO delete
-              sessionStorage.setItem('TOKEN', '123456');
               this.$router.push({ path: this.$route.query.redirect || '/' })
               this.loading = false
-            });
+            })
+              .catch(() => {
+                // TODO delete
+                this.$store.commit('user/SET_TOKEN', '123456')
+                this.$router.push({ path: this.$route.query.redirect || '/' })
+                this.loading = false
+              })
           } else {
             return false
           }

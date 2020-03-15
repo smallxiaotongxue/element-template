@@ -1,5 +1,5 @@
 module.exports = {
-  title: '系统名称',
+  title: '系统',
 
   /**
    * @type {boolean} true | false
