@@ -28,11 +28,12 @@ export const constantRoutes = [
         name: 'Home',
         meta: { title: '首页', icon: 'home', affix: true },
         component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-      }
+      },
+
+      /** when your routing map is too long, you can split it into small modules **/
+      ...componentsRouter,
     ]
   },
-  /** when your routing map is too long, you can split it into small modules **/
-  ...componentsRouter,
 
   {
     path: '/login',
@@ -93,9 +94,8 @@ export function resetRouter () {
 }
 
 router.beforeEach((to, from, next) => {
-  // 自动化修改页面标签的 title
-  // document.title = to.meta.title;
-  to.query['backUrl'] = from.fullPath;
+  // document.title = to.meta.title; // 自动化修改页面标签的 title
+  // to.query['backUrl'] = from.fullPath;
 
   if (sessionStorage.getItem('TOKEN')) {
     next();

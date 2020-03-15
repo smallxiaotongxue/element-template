@@ -1,13 +1,11 @@
-import Layout from '@/layout'
-
 export default [
   {
     path: '/components',
     name: 'ComponentDemo',
     meta: {
-      title: 'Components',
+      title: '组件',
       icon: 'component'
     },
-    component: Layout,
+    component: () => import(/* webpackChunkName: "components" */ '../../views/components/index')
   }
 ]

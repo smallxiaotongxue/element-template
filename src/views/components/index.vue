@@ -1,8 +1,6 @@
 <template>
   <div class="components">
-
-    <h3>组件</h3>
-
+    <h1>组件</h1>
   </div>
 </template>
 
