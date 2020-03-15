@@ -5,6 +5,12 @@ import defaultSettings from '@/settings'
 
 Vue.use(Router);
 
+// fixed bug
+const VueRouterPush = Router.prototype.push;
+Router.prototype.push = function push (to) {
+  return VueRouterPush.call(this, to).catch(err => err)
+}
+
 /* Layout */
 import Layout from '@/views/layout'
 
