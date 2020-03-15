@@ -9,6 +9,9 @@ const userInfoList = {
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: '系统管理员',
     introduction: 'I am a super administrator',
+    menuList: [
+
+    ]
   }
 }
 
@@ -21,20 +24,21 @@ Mock.mock(/.*\/user\/login.*/, 'post', (config) => {
   if (!token) {
     return { ret: -1, message: '账号密码不正确' }
   }
-
-  return {
+  let result = {
     ret: 0,
     data: {
       token: token,
       userInfo: userInfoList[token],
     },
     message: 'success'
-  }
+  };
+  console.log(config.url, result);
+  return result;
 });
 
 // get user info
 Mock.mock(/.*\/user\/userInfo.*/, 'post', (config) => {
-  const { token } = config.body
+  const { token } = JSON.parse(config.body);
   let info = userInfoList[token];
   return {
     ret: 0,
@@ -47,7 +51,7 @@ Mock.mock(/.*\/user\/userInfo.*/, 'post', (config) => {
 });
 
 // logout
-Mock.mock(/.*\/user\/logout.*/, 'post', (config) => {
+Mock.mock(/.*\/user\/logout.*/  , 'post', (config) => {
   return {
     ret: 0,
     message: 'success'

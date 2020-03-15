@@ -1,4 +1,4 @@
-import { login, getUserInfo, logout } from '../../api/user'
+import { login, logout } from '../../api/user'
 import { resetRouter } from '../../router'
 
 const state = {
@@ -26,7 +26,6 @@ const actions = {
     const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        debugger;
 
         const { data } = response
         commit('SET_TOKEN', data.token);
@@ -34,16 +33,8 @@ const actions = {
 
         resolve(data);
       }).catch(error => {
-        debugger;
-
         reject(error)
       })
-    })
-  },
-  getInfo ({ commit, state }, payload) {
-    return getUserInfo(payload).then(res => {
-      let data = res.data
-      commit('SET_USERINFO', data)
     })
   },
 
