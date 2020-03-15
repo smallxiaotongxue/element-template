@@ -32,20 +32,33 @@ export const constantRoutes = [
       ...componentsRouter,
     ]
   },
-
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import(/* webpackChunkName: "home" */ '../views/redirect/index')
+      }
+    ]
+  },
   {
     path: '/login',
     name: 'login',
-    meta: { title: '登录', icon: 'home', affix: false },
+    meta: { title: '登录' },
     component: () => import(/* webpackChunkName: "login" */ '../views/login.vue'),
   },
   {
     path: '/404',
-    meta: { title: '404', icon: 'home', affix: false },
+    meta: { title: '404' },
     component: () => import(/* webpackChunkName: "login" */ '@/views/error-page/404'),
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '*',
+    redirect: '/404'
+  }
 ];
 
 const createRouter = () => new Router({
@@ -63,7 +76,8 @@ export function resetRouter () {
   router.matcher = newRouter.matcher // reset router
 }
 
-const whiteList = ['/login', '/toLogin'] // no redirect whitelist
+const whiteList = ['/login', '/toLogin']; // no redirect whitelist
+
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title || ''} - ${defaultSettings.title}`; // 自动化修改页面标签的 title
   // to.query['backUrl'] = from.fullPath;

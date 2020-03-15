@@ -4,11 +4,15 @@ import { resetRouter } from '../../router'
 const state = {
   token: '',
   userInfo: {},
+  permission_route: [], // 用户当前菜单路由
 }
 
 const mutations = {
   SET_USERINFO: (state, userInfo) => {
     state.userInfo = userInfo
+  },
+  SET_PERMISSION_MENU: (state, menu) => {
+    state.permission_route = menu
   },
   SET_TOKEN (state, token) {
     state.token = token
@@ -30,6 +34,7 @@ const actions = {
         const { data } = response
         commit('SET_TOKEN', data.token);
         commit('SET_USERINFO', data.userInfo);
+        commit('SET_PERMISSION_MENU', data.permission_route);
 
         resolve(data);
       }).catch(error => {
@@ -43,6 +48,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then((res) => {
         commit('SET_TOKEN', '')
+        commit('SET_USERINFO', {});
+        commit('SET_PERMISSION_MENU', []);
 
         resetRouter()
 

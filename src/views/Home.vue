@@ -9,10 +9,6 @@
     name: 'Home',
     data () {
       return {
-        isCollapse: false,
-        menuTab: [],
-        name: name,
-        activeTab: '/'
       }
     },
     computed: {},

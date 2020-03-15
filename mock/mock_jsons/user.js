@@ -10,7 +10,6 @@ const userInfoList = {
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: '系统管理员',
     introduction: '查水表的',
-    permissionMenu: [...permissionList]
   }
 }
 
@@ -28,6 +27,7 @@ Mock.mock(/.*\/user\/login.*/, 'post', (config) => {
     data: {
       token: token,
       userInfo: userInfoList[token],
+      permission_route: [...permissionList]
     },
     message: 'success'
   };
