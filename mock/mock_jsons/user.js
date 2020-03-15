@@ -1,4 +1,5 @@
 const Mock = require('mockjs')
+import { permissionList } from './mockList';
 
 const tokens = {
   admin: 'admin-token',
@@ -8,10 +9,8 @@ const userInfoList = {
   'admin-token': {
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     name: '系统管理员',
-    introduction: 'I am a super administrator',
-    menuList: [
-
-    ]
+    introduction: '查水表的',
+    permissionMenu: [...permissionList]
   }
 }
 

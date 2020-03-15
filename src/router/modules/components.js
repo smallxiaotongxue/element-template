@@ -1,11 +1,22 @@
 export default [
   {
     path: '/components',
-    name: 'ComponentDemo',
-    meta: {
-      title: '组件',
-      icon: 'component'
-    },
-    component: () => import(/* webpackChunkName: "components" */ '../../views/components/index')
+    name: 'Components',
+    meta: { title: '组件', },
+    component: () => import(/* webpackChunkName: "components" */ '../../views/components/index'),
+    children: [
+      {
+        path: '/components/page1',
+        name: 'ComponentsPage1',
+        meta: { title: '组件一页面', },
+        component: () => import(/* webpackChunkName: "components" */ '../../views/components/page1')
+      },
+      {
+        path: '/components/page2',
+        name: 'ComponentsPage2',
+        meta: { title: '组件二页面', },
+        component: () => import(/* webpackChunkName: "components" */ '../../views/components/page2')
+      },
+    ]
   }
 ]

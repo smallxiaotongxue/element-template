@@ -1,6 +1,8 @@
 <template>
   <div class="components">
-    <h1>组件</h1>
+    <h1>组件综合页</h1>
+
+    <router-view></router-view>
   </div>
 </template>
 

@@ -13,14 +13,11 @@ import componentsRouter from './modules/components';
 
 
 /**
- * constantRoutes 基础页面不需要鉴权，所有角色都可以访问
- * a base page that does not have permission requirements
- * all roles can be accessed
+ * constantRoutes 基础路由
  */
 export const constantRoutes = [
   {
     path: '/',
-    name: 'home',
     component: Layout,
     redirect: '/home',
     children: [
@@ -49,36 +46,6 @@ export const constantRoutes = [
   },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
-];
-
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission',
-    meta: {
-      title: 'Permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'page',
-        component: () => import('@/views/permission/index'),
-        name: 'PagePermission',
-        meta: {
-          title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      }
-    ]
-  }
 ];
 
 const createRouter = () => new Router({
