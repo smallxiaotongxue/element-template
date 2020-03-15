@@ -1,7 +1,7 @@
 export const permissionList = [
   {
     name: '首页',
-    path: '/',
+    path: '/home',
     icon: 'el-icon-platform-eleme',
     id: 10000,
     type: 'page',
