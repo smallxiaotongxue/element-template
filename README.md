@@ -1,5 +1,12 @@
 # element-template
 
+### 待完成
+1. 路由鉴权部分
+2. 页面刷新保存当前数据 sessionStorage
+3. vue.config.js优化
+4. 基础页面
+5. 组件优化
+
 ## Project setup
 ```
 npm install
