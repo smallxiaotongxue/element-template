@@ -127,7 +127,6 @@
     width: 310px;
     padding: 30px;
     z-index: 3;
-    margin-right: -40%;
     position: relative;
     background: rgba(50, 50, 50, 0.5);
 
