@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import defaultSettings from '@/settings'
-import store from '../store/index'
+// import store from '../store/index'
 
 Vue.use(Router);
 
