@@ -15,7 +15,6 @@ const userInfoList = {
 
 // user login
 Mock.mock(/.*\/user\/login.*/, 'post', (config) => {
-  console.log('Mock: ', config);
   const { username } = JSON.parse(config.body);
   const token = tokens[username];
   // mock error

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Message } from 'element-ui'
 import router from '../router/index';
+import store from "../store/index";
 // import qs from 'qs';
-// import store from "../store/index";
 
 // 创建axios实例
 let isJsBaseUrl = false;
@@ -47,6 +47,8 @@ service.interceptors.response.use(
     if (res.ret === 401) {
       // 未登录
       Message.error(response.message || '请求失败，请稍后重试');
+
+      store.commit('user/SET_TOKEN', ''); // 清理token
       router.push({
         path: '/login',
         query: { redirect: router.currentRoute.fullPath } // 从哪个页面跳转过来
@@ -59,7 +61,7 @@ service.interceptors.response.use(
       return Promise.resolve(res);
     } else {
       // 其他错误
-      Message.error(response.message || response.msg || '服务器连接失败');
+      Message.error(response.message || res.message || res.msg || '服务器连接失败');
       return Promise.reject(response)
     }
   },

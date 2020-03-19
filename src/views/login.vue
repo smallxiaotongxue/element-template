@@ -87,13 +87,9 @@
             this.$store.dispatch('user/login', this.form).then((res) => {
               this.$router.push({ path: this.$route.query.redirect || '/' })
               this.loading = false
-            })
-              .catch(() => {
-                // TODO delete
-                this.$store.commit('user/SET_TOKEN', '123456')
-                this.$router.push({ path: this.$route.query.redirect || '/' })
-                this.loading = false
-              })
+            }).catch(() => {
+              this.loading = false
+            });
           } else {
             return false
           }

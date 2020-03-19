@@ -10,9 +10,20 @@ const state = {
 const mutations = {
   SET_USERINFO: (state, userInfo) => {
     state.userInfo = userInfo
+    if (Object.keys(userInfo).length > 0) {
+      sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
+    } else {
+      sessionStorage.removeItem('userInfo')
+    }
   },
   SET_PERMISSION_MENU: (state, menu) => {
-    state.permission_route = menu
+    state.permission_route = menu;
+
+    if (menu && menu.length > 0) {
+      sessionStorage.setItem('permission_route', JSON.stringify(menu))
+    } else {
+      sessionStorage.removeItem('permission_route');
+    }
   },
   SET_TOKEN (state, token) {
     state.token = token
