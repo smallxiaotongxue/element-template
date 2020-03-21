@@ -30,6 +30,15 @@ export const permissionList = [
         type: 'page',
         children: []
       },
+      {
+        name: '组件3',
+        path: '/components/page3',
+        icon: 'el-icon-star-on',
+        id: 100012,
+        type: 'page',
+        children: [],
+        hidden: true
+      },
     ]
   },
 ]

@@ -24,6 +24,12 @@ export default [
         meta: { title: '组件三页面', },
         component: () => import(/* webpackChunkName: "components" */ '../../views/components/page3')
       },
+      {
+        path: '/components/page4',
+        name: 'ComponentsPage4',
+        meta: { title: '组件4页面', },
+        component: () => import(/* webpackChunkName: "components" */ '../../views/components/page4')
+      },
     ]
   }
 ]
