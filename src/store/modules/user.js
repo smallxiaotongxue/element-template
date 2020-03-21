@@ -46,7 +46,6 @@ const mutations = {
     }
   },
   SET_MENU: (state, menu) => {
-    debugger;
     state.userMenu = menu;
     state.permissionRoutes = generateRoutes(menu);
   },
