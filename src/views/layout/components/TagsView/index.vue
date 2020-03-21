@@ -59,7 +59,7 @@
         } else {
           document.body.removeEventListener('click', this.closeMenu)
         }
-      }
+      },
     },
     mounted () {
       this.addTags()
@@ -105,7 +105,16 @@
       addTags () {
         const { name } = this.$route
         if (name) {
-          this.$store.dispatch('tagsView/addView', this.$route)
+          let route = {
+            name: this.$route.name,
+            meta: this.$route.meta,
+            path: this.$route.path,
+            hash: this.$route.hash,
+            query: this.$route.query,
+            params: this.$route.params,
+            fullPath: this.$route.fullPath,
+          };
+          this.$store.dispatch('tagsView/addView', route);
         }
         return false
       },
@@ -114,7 +123,7 @@
         this.$nextTick(() => {
           for (const tag of tags) {
             if (tag.to.path === this.$route.path) {
-              this.$refs.scrollPane.moveToTarget(tag)
+              this.$refs['scrollPane'].moveToTarget(tag)
               // when query is different then update
               if (tag.to.fullPath !== this.$route.fullPath) {
                 this.$store.dispatch('tagsView/updateVisitedView', this.$route)

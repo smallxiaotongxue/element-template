@@ -74,6 +74,13 @@ const actions = {
       })
     })
   },
+  // clearUserMessage
+  clearUserMessage ({ commit, state }) {
+    commit('SET_TOKEN', '')
+    commit('SET_USERINFO', {});
+    commit('SET_PERMISSION_MENU', []);
+    sessionStorage.removeItem('tag-list');
+  },
 }
 
 export default {
