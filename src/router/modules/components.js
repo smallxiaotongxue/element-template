@@ -18,6 +18,12 @@ export default [
         meta: { title: '组件二页面', },
         component: () => import(/* webpackChunkName: "components" */ '../../views/components/page2')
       },
+      {
+        path: '/components/page3',
+        name: 'ComponentsPage3',
+        meta: { title: '组件三页面', },
+        component: () => import(/* webpackChunkName: "components" */ '../../views/components/page3')
+      },
     ]
   }
 ]

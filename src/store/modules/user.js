@@ -4,7 +4,8 @@ import { resetRouter } from '../../router'
 const state = {
   token: '',
   userInfo: {},
-  permission_route: [], // 用户当前菜单路由
+  userMenu: [],
+  permission_route: [], // 用户当前授权路由
 }
 
 const mutations = {
@@ -14,6 +15,15 @@ const mutations = {
       sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
     } else {
       sessionStorage.removeItem('userInfo')
+    }
+  },
+  SET_MENU: (state, menu) => {
+    state.userMenu = menu;
+
+    if (menu && menu.length > 0) {
+      sessionStorage.setItem('userMenu', JSON.stringify(menu))
+    } else {
+      sessionStorage.removeItem('userMenu');
     }
   },
   SET_PERMISSION_MENU: (state, menu) => {

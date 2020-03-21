@@ -67,6 +67,35 @@ export const constantRoutes = [
   }
 ];
 
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/home',
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        meta: { title: '首页', affix: true },
+        component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+      },
+
+      /** when your routing map is too long, you can split it into small modules **/
+      ...componentsRouter,
+    ]
+  },
+
+  // 404 page must be placed at the end !!!
+  {
+    path: '*',
+    redirect: '/404'
+  }
+]
+
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: (to, from, position) => {
