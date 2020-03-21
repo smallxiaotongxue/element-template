@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import defaultSettings from '@/settings'
-// import store from '../store/index'
+import store from '../store/index'
 
 Vue.use(Router);
 
@@ -67,35 +67,6 @@ export const constantRoutes = [
   }
 ];
 
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/home',
-    children: [
-      {
-        path: 'home',
-        name: 'Home',
-        meta: { title: '首页', affix: true },
-        component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-      },
-
-      /** when your routing map is too long, you can split it into small modules **/
-      ...componentsRouter,
-    ]
-  },
-
-  // 404 page must be placed at the end !!!
-  {
-    path: '*',
-    redirect: '/404'
-  }
-]
-
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: (to, from, position) => {
@@ -113,22 +84,33 @@ export function resetRouter () {
 
 const whiteList = ['/login', '/toLogin']; // no redirect whitelist
 
-router.beforeEach((to, from, next) => {
+function hasPermissionFunction (route, permissionList) {
+  if (route.meta) {
+    return permissionList.includes(route.path);
+  } else {
+    return true
+  }
+}
+
+router.beforeEach(async (to, from, next) => {
   document.title = `${to.meta.title || ''} - ${defaultSettings.title}`; // 自动化修改页面标签的 title
   // to.query['backUrl'] = from.fullPath;
 
   let token = sessionStorage.getItem('TOKEN');
   if (token) {
-    if (to.path === "/login") {
-      next({ path: '/' }); // if is logged in, redirect to the home page
-    } else {
-      // 确定用户当前访问路径是否有权限
-      const hasPermission = true;
-      if (hasPermission) {
-        next();
+    // 确定用户当前访问路径是否有权限
+    if (store.state.user.permissionRoutes.length <= 0) {
+      await store.dispatch('user/getUserMenu');
+    }
+    const hasPermission = hasPermissionFunction(to, store.state.user.permissionRoutes);
+    if (hasPermission) {
+      if (to.path === "/login") {
+        next({ path: '/' }); // if is logged in, redirect to the home page
       } else {
-        next(`/login?redirect=${to.path}`);
+        next();
       }
+    } else {
+      next(`/404`);
     }
   } else {
     /* has no token */

@@ -1,11 +1,39 @@
-import { login, logout } from '../../api/user'
+import { login, logout, getUserMenu } from '../../api/user'
 import { resetRouter } from '../../router'
 
 const state = {
   token: '',
   userInfo: {},
   userMenu: [],
-  permission_route: [], // 用户当前授权路由
+  permissionRoutes: [], // 用户当前授权路由
+}
+
+/**
+ * Filter asynchronous routing tables by recursion
+ * @param routes asyncRoutes
+ * @param child
+ * @param res
+ */
+export function filterAsyncRoutes(routes, child = 'children', res = []) {
+
+  routes.forEach(route => {
+    const item = { ...route };
+    res.push(item.path);
+    if (item[child]) {
+      filterAsyncRoutes(item[child], child = 'children', res);
+    }
+  });
+
+  return res;
+}
+
+function generateRoutes(userMenu) {
+  let defaultRoutes = [
+    '/login',
+    '/404',
+  ];
+  let accessedRoutes = filterAsyncRoutes(userMenu);
+  return [...defaultRoutes, ...accessedRoutes];
 }
 
 const mutations = {
@@ -18,21 +46,14 @@ const mutations = {
     }
   },
   SET_MENU: (state, menu) => {
+    debugger;
     state.userMenu = menu;
+    state.permissionRoutes = generateRoutes(menu);
 
     if (menu && menu.length > 0) {
       sessionStorage.setItem('userMenu', JSON.stringify(menu))
     } else {
       sessionStorage.removeItem('userMenu');
-    }
-  },
-  SET_PERMISSION_MENU: (state, menu) => {
-    state.permission_route = menu;
-
-    if (menu && menu.length > 0) {
-      sessionStorage.setItem('permission_route', JSON.stringify(menu))
-    } else {
-      sessionStorage.removeItem('permission_route');
     }
   },
   SET_TOKEN (state, token) {
@@ -55,7 +76,21 @@ const actions = {
         const { data } = response
         commit('SET_TOKEN', data.token);
         commit('SET_USERINFO', data.userInfo);
-        commit('SET_PERMISSION_MENU', data.permission_route);
+        commit('SET_MENU', data.userMenu);
+
+        resolve(data);
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  // getUserMenu
+  getUserMenu ({ commit }, params) {
+    return new Promise((resolve, reject) => {
+      getUserMenu(params).then(response => {
+        const { data } = response
+        commit('SET_MENU', data.userMenu);
 
         resolve(data);
       }).catch(error => {
@@ -68,9 +103,7 @@ const actions = {
   logout ({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then((res) => {
-        commit('SET_TOKEN', '')
-        commit('SET_USERINFO', {});
-        commit('SET_PERMISSION_MENU', []);
+        dispatch('clearUserMessage');
 
         resetRouter()
 
@@ -84,11 +117,11 @@ const actions = {
       })
     })
   },
-  // clearUserMessage
+
   clearUserMessage ({ commit, state }) {
     commit('SET_TOKEN', '')
     commit('SET_USERINFO', {});
-    commit('SET_PERMISSION_MENU', []);
+    commit('SET_MENU', []);
     sessionStorage.removeItem('tag-list');
   },
 }

@@ -26,7 +26,7 @@ Mock.mock(/.*\/user\/login.*/, 'post', (config) => {
     data: {
       token: token,
       userInfo: userInfoList[token],
-      permission_route: [...permissionList]
+      userMenu: [...permissionList]
     },
     message: 'success'
   };
@@ -35,14 +35,11 @@ Mock.mock(/.*\/user\/login.*/, 'post', (config) => {
 });
 
 // get user info
-Mock.mock(/.*\/user\/userInfo.*/, 'post', (config) => {
-  const { token } = JSON.parse(config.body);
-  let info = userInfoList[token];
+Mock.mock(/.*\/user\/getUserMenu.*/, 'post', (config) => {
   return {
     ret: 0,
     data: {
-      token: token,
-      userInfo: info || {},
+      userMenu: [...permissionList]
     },
     message: 'success'
   }

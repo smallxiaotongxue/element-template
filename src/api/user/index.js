@@ -4,8 +4,8 @@ export const login = params => {
   return axios.post('/user/login', params);
 };
 
-export const getUserInfo = params => {
-  return axios.post('/user/getUserInfo', params);
+export const getUserMenu = params => {
+  return axios.post('/user/getUserMenu', params);
 };
 
 export const logout = params => {
@@ -14,6 +14,6 @@ export const logout = params => {
 
 export default {
   login,
-  getUserInfo,
+  getUserMenu,
   logout,
 }
