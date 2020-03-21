@@ -19,11 +19,9 @@ export default {
       sessionStorage.setItem('tag-list', JSON.stringify(this.$store.state.tagsView.visitedViews));
     },
     initSession () {
-      debugger;
       let tagList = sessionStorage.getItem('tag-list');
       let userInfo = sessionStorage.getItem('userInfo');
       let TOKEN = sessionStorage.getItem('TOKEN');
-      let userMenu = sessionStorage.getItem('userMenu');
       if (tagList) {
         this.$store.commit('tagsView/SET_VISITED_VIEW', JSON.parse(tagList));
       }
@@ -33,9 +31,6 @@ export default {
       if (TOKEN) {
         this.$store.commit('user/SET_TOKEN', TOKEN);
       }
-      // if (userMenu) {
-      //   this.$store.commit('user/SET_MENU', JSON.parse(userMenu));
-      // }
     }
   }
 }

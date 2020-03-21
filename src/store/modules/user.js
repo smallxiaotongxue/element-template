@@ -27,12 +27,12 @@ export function filterAsyncRoutes(routes, child = 'children', res = []) {
   return res;
 }
 
-function generateRoutes(userMenu) {
+function generateRoutes(menu) {
   let defaultRoutes = [
     '/login',
     '/404',
   ];
-  let accessedRoutes = filterAsyncRoutes(userMenu);
+  let accessedRoutes = filterAsyncRoutes(menu);
   return [...defaultRoutes, ...accessedRoutes];
 }
 
@@ -49,12 +49,6 @@ const mutations = {
     debugger;
     state.userMenu = menu;
     state.permissionRoutes = generateRoutes(menu);
-
-    if (menu && menu.length > 0) {
-      sessionStorage.setItem('userMenu', JSON.stringify(menu))
-    } else {
-      sessionStorage.removeItem('userMenu');
-    }
   },
   SET_TOKEN (state, token) {
     state.token = token
