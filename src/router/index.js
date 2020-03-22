@@ -85,7 +85,7 @@ export function resetRouter () {
 const whiteList = ['/login', '/toLogin']; // no redirect whitelist
 
 function hasPermissionFunction (route, permissionList) {
-  if (route.meta) {
+  if (route.meta && Object.keys(route.meta) > 0) {
     return permissionList.includes(route.path);
   } else {
     return true
