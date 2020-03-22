@@ -1,5 +1,5 @@
-// import axios from '../../plugins/axios';
+import { post } from '../../plugins/axios';
 
-export default {
-
-}
+export const xxx = params => {
+  return post('xxx', params);
+};

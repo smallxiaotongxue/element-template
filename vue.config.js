@@ -5,6 +5,10 @@ const outputDirName = 'output_' + ENV;
 // <!--gzip 压缩-->
 // const CompressionWebpackPlugin = require("compression-webpack-plugin");
 // const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
+// const path = require('path')
+// function resolve(dir) {
+//   return path.join(__dirname, dir)
+// }
 
 module.exports = {
   /** 区分打包环境与开发环境
@@ -36,7 +40,10 @@ module.exports = {
   productionSourceMap: false,
 
   // // 调整内部的webpack配置. // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  // chainWebpack: () => {},
+  // chainWebpack: (config) => {
+  //   config.resolve.alias.set('@', resolve('src'))
+  //     .set('@assets', resolve('src/assets'))
+  // },
 
   // webpack的相关配置在这里
   configureWebpack: config => {
@@ -104,6 +111,8 @@ module.exports = {
 
   // configure webpack-dev-server behavior
   // devServer: {
+        // 接口未实现情况下，使用mock
+        // before: require('./mock')
   //   open: process.platform === 'darwin',
   //   disableHostCheck: false,
   //   host: '0.0.0.0',
