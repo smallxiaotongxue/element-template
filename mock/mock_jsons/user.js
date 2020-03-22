@@ -1,4 +1,5 @@
 const Mock = require('mockjs')
+import qs from 'qs';
 import { permissionList } from './mockList';
 
 const tokens = {
@@ -15,7 +16,7 @@ const userInfoList = {
 
 // user login
 Mock.mock(/.*\/user\/login.*/, 'post', (config) => {
-  const { username } = JSON.parse(config.body);
+  const { username } = qs.parse(config.body);
   const token = tokens[username];
   // mock error
   if (!token) {

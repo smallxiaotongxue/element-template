@@ -81,7 +81,7 @@ export default service
 export function get (url, params = {}) {
   return new Promise((resolve, reject) => {
     service.get(url, { params: params }).then((response) => {
-      resolve(response.data)
+      resolve(response)
     }).catch((err) => {
       reject(err)
     })
@@ -109,7 +109,7 @@ export function post (
 ) {
   return new Promise((resolve, reject) => {
     service.post(url, data, config).then((response) => {
-      resolve(response.data)
+      resolve(response)
     }, (err) => {
       reject(err)
     })
@@ -125,7 +125,7 @@ export function patch (url, data = {}) {
         return qs.stringify(fData);
       }]
     }).then((response) => {
-      resolve(response.data)
+      resolve(response)
     }, (err) => {
       reject(err)
     })
@@ -135,7 +135,7 @@ export function patch (url, data = {}) {
 export function del (url, data) {
   return new Promise((resolve, reject) => {
     service.delete(url, { data }).then((response) => {
-      resolve(response.data)
+      resolve(response)
     }, (err) => {
       reject(err)
     })
