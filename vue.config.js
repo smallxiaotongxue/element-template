@@ -2,6 +2,10 @@ const FileManagerPlugin = require('filemanager-webpack-plugin'); // 引入filema
 const ENV = process.env.NODE_ENV === 'production' ? 'production' : process.env.NODE_ENV === 'testing' ? 'testing' : 'dev';
 const outputDirName = 'output_' + ENV;
 
+// <!--gzip 压缩-->
+// const CompressionWebpackPlugin = require("compression-webpack-plugin");
+// const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
+
 module.exports = {
   /** 区分打包环境与开发环境
    * process.env.NODE_ENV==='production'  (打包环境)
@@ -38,8 +42,10 @@ module.exports = {
   configureWebpack: config => {
     if (ENV === 'testing' || ENV === 'production') {
       const plugins = [];
+
+      // 初始化 filemanager-webpack-plugin 插件实例
       plugins.push(
-        new FileManagerPlugin({ // 初始化 filemanager-webpack-plugin 插件实例
+        new FileManagerPlugin({
           onEnd: {
             delete: [ // 首先需要删除项目根目录下的dist.zip
               `./${outputDirName}.zip`,
@@ -59,6 +65,19 @@ module.exports = {
           }
         })
       );
+
+      // // Begin 生成 gzip 压缩文件
+      // plugins.push(
+      //   new CompressionWebpackPlugin({
+      //     filename: "[path].gz[query]",
+      //     algorithm: "gzip",
+      //     test: productionGzipExtensions,
+      //     threshold: 10240,
+      //     minRatio: 0.8
+      //   })
+      // );
+      // // End 生成 gzip 压缩文件
+
       config.plugins = [...config.plugins, ...plugins]
     }
   },
