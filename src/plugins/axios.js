@@ -7,10 +7,12 @@ import qs from 'qs'
 // 创建axios实例
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
-let isJsBaseUrl = false
-let apiUrl = (isJsBaseUrl && window.SystemApiBaseUrl) ? window.SystemApiBaseUrl : process.env.VUE_APP_API_URL // api的 base_url
+let IS_JS_URL = false;
+// api的 base_url
+let BASE_URL = (IS_JS_URL && window.SYSTEM_CONFIG.API_URL) ? window.SYSTEM_CONFIG.API_URL : process.env.VUE_APP_API_URL;
+
 const service = axios.create({
-  baseURL: apiUrl,
+  baseURL: BASE_URL,
   timeout: 60000, // 请求超时时间
   // withCredentials: true,
   // transformResponse: [function (data) {
