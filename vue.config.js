@@ -1,5 +1,5 @@
 const FileManagerPlugin = require('filemanager-webpack-plugin'); // 引入filemanager-webpack-plugin插件
-const ENV = process.env.NODE_ENV === 'production' ? 'production' : process.env.NODE_ENV === 'testing' ? 'testing' : 'dev';
+const ENV = process.env.VUE_APP_MODE === 'production' ? 'production' : process.env.VUE_APP_MODE === 'testing' ? 'testing' : 'dev';
 const outputDirName = 'output_' + ENV;
 
 // <!--gzip 压缩-->
@@ -54,20 +54,12 @@ module.exports = {
       plugins.push(
         new FileManagerPlugin({
           onEnd: {
-            delete: [ // 首先需要删除项目根目录下的dist.zip
-              `./${outputDirName}.zip`,
-            ],
+            delete: [`./${outputDirName}.zip`], // 首先需要删除项目根目录下的dist.zip
             // copy: [
-            //   {
-            //     source: ``,
-            //     destination: `./${outputDirName}.zip`
-            //   }
+            //   { source: ``, destination: `./${outputDirName}` }
             // ],
             archive: [ // 然后我们选择dist文件夹将之打包成dist.zip并放在根目录
-              {
-                source: `./${outputDirName}.zip`,
-                destination: `./${outputDirName}.zip`
-              },
+              { source: `./${outputDirName}`, destination: `./${outputDirName}.zip` },
             ]
           }
         })
