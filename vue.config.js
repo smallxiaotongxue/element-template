@@ -1,6 +1,6 @@
-const FileManagerPlugin = require('filemanager-webpack-plugin'); // 引入filemanager-webpack-plugin插件
-const ENV = process.env.VUE_APP_MODE === 'production' ? 'production' : process.env.VUE_APP_MODE === 'testing' ? 'testing' : 'dev';
-const outputDirName = 'output_' + ENV;
+const FileManagerPlugin = require('filemanager-webpack-plugin') // 引入filemanager-webpack-plugin插件
+const ENV = process.env.VUE_APP_MODE === 'production' ? 'production' : process.env.VUE_APP_MODE === 'testing' ? 'testing' : 'dev'
+const outputDirName = 'output_' + ENV
 
 // <!--gzip 压缩-->
 // const CompressionWebpackPlugin = require("compression-webpack-plugin");
@@ -48,7 +48,7 @@ module.exports = {
   // webpack的相关配置在这里
   configureWebpack: config => {
     if (ENV === 'testing' || ENV === 'production') {
-      const plugins = [];
+      const plugins = []
 
       // 初始化 filemanager-webpack-plugin 插件实例
       plugins.push(
@@ -63,7 +63,7 @@ module.exports = {
             ]
           }
         })
-      );
+      )
 
       // // Begin 生成 gzip 压缩文件
       // plugins.push(
@@ -93,7 +93,7 @@ module.exports = {
         `
       }
     },
-},
+  },
 
   // use thread-loader for babel & TS in production build // enabled by default if the machine has more than 1 cores
   // parallel: require('os').cpus().length > 1,
@@ -103,8 +103,8 @@ module.exports = {
 
   // configure webpack-dev-server behavior
   // devServer: {
-        // 接口未实现情况下，使用mock
-        // before: require('./mock')
+  // 接口未实现情况下，使用mock
+  // before: require('./mock')
   //   open: process.platform === 'darwin',
   //   disableHostCheck: false,
   //   host: '0.0.0.0',
@@ -119,4 +119,4 @@ module.exports = {
   // pluginOptions: {
   //   // ...
   // }
-};
+}
